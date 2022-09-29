@@ -17,6 +17,7 @@ class MachineState(enum.Enum):
 
 
 class MachineType(enum.Enum):
+    DRYER_S = "小型乾燥機"
     DRYER_M = "中型乾燥機"
     DRYER_L = "大型乾燥機"
     WASHING_DRYER_S = "小型洗濯乾燥機"
@@ -24,5 +25,6 @@ class MachineType(enum.Enum):
     WASHING_DRYER_L = "大型洗濯乾燥機"
     WASHING_S = "小型洗濯機"
     WASHING_M = "中型洗濯機"
+    WASHING_L = "大型洗濯機"
     SHOE_DRYER = "スニーカードライヤー"
     SHOE_WASHING = "スニーカーウォッシャー"

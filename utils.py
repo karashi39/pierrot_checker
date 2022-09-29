@@ -1,9 +1,7 @@
-from typing import Optional
-
 from enums import MachineType
 
 
-def get_target_machine_types(targets: str) -> Optional[list[MachineType]]:
+def get_target_machine_types(targets: str) -> list[MachineType]:
     target_machine_types = []
     if "w" in targets:
         if "s" in targets:

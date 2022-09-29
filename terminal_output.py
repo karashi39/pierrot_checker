@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from enums import TableHeader, MachineState, MachineType
+from enums import MachineState, MachineType, TableHeader
 
 
 class bcolors:
@@ -16,10 +16,10 @@ class bcolors:
 
 
 class TerminalOutput:
-    title: str = "OUTPUT"
-    machine_table: dict[str, Any]
+    title: str
+    machine_table: list[dict[str, Any]]
 
-    def __init__(self, title: str, machine_table: dict[str, Any]) -> None:
+    def __init__(self, title: str, machine_table: list[dict[str, Any]]) -> None:
         self.title = title
         self.machine_table = machine_table
 
@@ -32,7 +32,7 @@ class TerminalOutput:
                 state_out = f"{bcolors.OKGREEN}{value}{bcolors.ENDC}"
             else:
                 value = machine[TableHeader.REMAINING.value]
-                state_out = f"{bcolors.FAIL}{MachineState.Using.value} 残り {value}分{bcolors.ENDC}"
+                state_out = f"{bcolors.FAIL}{MachineState.USING.value} 残り {value}分{bcolors.ENDC}"
             print(f"{machine_type} {state_out}")
 
 
