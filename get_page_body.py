@@ -1,6 +1,6 @@
 import requests
 
 
-def get_page_body(url: str) -> str:
+def get_page_body(url: str) -> bytes:
     result = requests.get(url)
-    return str(result.content)
+    return result.content

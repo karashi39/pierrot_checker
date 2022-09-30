@@ -19,7 +19,10 @@ def main(store_number: int, targets: Optional[str] = None) -> None:
             if row[str(TableHeader.MACHINE_TYPE.value)] in target_machine_types
         ]
     terminal_output = TerminalOutput(title, machine_table)
-    terminal_output.print_simple()
+    if targets:
+        terminal_output.print_simple()
+    else:
+        terminal_output.print()
 
 
 if __name__ == "__main__":

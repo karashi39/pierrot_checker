@@ -20,19 +20,15 @@ class bcolors:
 class TerminalOutput:
     title: str
     machine_table: list[dict[str, Any]]
+    pretty_table: prettytable.PrettyTable
 
     def __init__(self, title: str, machine_table: list[dict[str, Any]]) -> None:
         self.title = title
         self.machine_table = machine_table
+        self.set_pretty_table()
 
-    def print_simple(self) -> None:
-        print()
-        print(f"{bcolors.BOLD}{self.title}{bcolors.ENDC}")
-        print()
+    def set_pretty_table(self) -> None:
         pretty_table = prettytable.PrettyTable()
-        pretty_table.align = "l"
-        pretty_table.hrules = prettytable.HEADER
-        pretty_table.vrules = prettytable.NONE
         pretty_table.field_names = [
             TableHeader.MACHINE_TYPE.value,
             TableHeader.STATE.value,
@@ -46,5 +42,22 @@ class TerminalOutput:
                 value = machine[TableHeader.REMAINING.value]
                 state_out = f"{bcolors.FAIL}{MachineState.USING.value} 残り {value}分{bcolors.ENDC}"
             pretty_table.add_row([machine_type, state_out])
-        print(pretty_table)
+        self.pretty_table = pretty_table
+
+    def print(self) -> None:
+        self.pretty_table.align = "l"
+        self.pretty_table.hrules = prettytable.HEADER
+        self.pretty_table.vrules = prettytable.NONE
         print()
+        print(f"{bcolors.BOLD}{self.title}{bcolors.ENDC}")
+        print()
+        print(self.pretty_table)
+        print()
+
+    def print_simple(self) -> None:
+        self.pretty_table.align = "l"
+        self.pretty_table.hrules = prettytable.HEADER
+        self.pretty_table.header = False
+        self.pretty_table.border = False
+        print(self.title)
+        print(self.pretty_table)
