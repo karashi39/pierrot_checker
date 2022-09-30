@@ -9,6 +9,7 @@ class TableHeader(enum.Enum):
     SIZE = "容量"
     MACHINE = "機器"
     HOGE = "機別"
+    STATE = "状態"
 
 
 class MachineState(enum.Enum):

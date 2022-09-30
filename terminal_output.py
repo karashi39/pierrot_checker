@@ -1,6 +1,8 @@
-from typing import Any, Optional
+from typing import Any
 
-from enums import MachineState, MachineType, TableHeader
+import prettytable
+
+from enums import MachineState, TableHeader
 
 
 class bcolors:
@@ -23,8 +25,18 @@ class TerminalOutput:
         self.title = title
         self.machine_table = machine_table
 
-    def print(self) -> None:
-        print(self.title)
+    def print_simple(self) -> None:
+        print()
+        print(f"{bcolors.BOLD}{self.title}{bcolors.ENDC}")
+        print()
+        pretty_table = prettytable.PrettyTable()
+        pretty_table.align = "l"
+        pretty_table.hrules = prettytable.HEADER
+        pretty_table.vrules = prettytable.NONE
+        pretty_table.field_names = [
+            TableHeader.MACHINE_TYPE.value,
+            TableHeader.STATE.value,
+        ]
         for machine in self.machine_table:
             machine_type = machine[TableHeader.MACHINE_TYPE.value].value
             if machine[TableHeader.MACHINE_STATE.value] == MachineState.WAITING.value:
@@ -33,4 +45,6 @@ class TerminalOutput:
             else:
                 value = machine[TableHeader.REMAINING.value]
                 state_out = f"{bcolors.FAIL}{MachineState.USING.value} 残り {value}分{bcolors.ENDC}"
-            print(f"{machine_type} {state_out}")
+            pretty_table.add_row([machine_type, state_out])
+        print(pretty_table)
+        print()
