@@ -40,7 +40,7 @@ class TerminalOutput:
                 state_out = f"{bcolors.OKGREEN}{value}{bcolors.ENDC}"
             else:
                 value = machine[TableHeader.REMAINING.value]
-                state_out = f"{bcolors.FAIL}{MachineState.USING.value} 残り {value}分{bcolors.ENDC}"
+                state_out = f"{bcolors.FAIL}{MachineState.USING.value} 残り {value}{bcolors.ENDC}"
             pretty_table.add_row([machine_type, state_out])
         self.pretty_table = pretty_table
 
